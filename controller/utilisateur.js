@@ -17,19 +17,19 @@ const ajouterUtilisateur = async (req, res) =>{
     }
 }
 
-const getTousUtilisateurs =  async (req, res) => {
+const getTousUtilisateurs = async (req, res) => {
     try {
-        let cursor = client.bd().collection("utilisateurs").find(); // recupére les donnés 
-        let result = await cursor.toArray();
-        if(result.lengh>0){
-            res.status(200).json(result); // tableau non vide 
-        }else{
-            res.status(204).json({msg : " Aucun utilisateur trouvé "})
-        }
+      let cursor = client.bd().collection("utilisateurs").find();
+      let result = await cursor.toArray();
+      if (result.length > 0) {
+        res.status(200).json(result);
+      } else {
+        res.status(204).json({ msg: "Aucun utilisateur trouvé" });
+      }
     } catch (error) {
-        console.log(error);
-        res.status(500).json(error);
+      console.log(error);
+      res.status(501).json(error);
     }
-}
+  };
 
 module.exports = { ajouterUtilisateur, getTousUtilisateurs }
